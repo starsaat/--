@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 时间复杂度：O(logn)
+         * 空间复杂的：O(1)
+        */
+        var search = function (nums, target) {
+            //定义区间 [left,right]---左闭右闭
+            let left = 0
+            let right = nums.length - 1
+            //当left === right时，区间[left,right]是合法的
+            while (left <= right) {
+                //计算区间中间值，利用位运算，不用考虑小数问题(位运算 + 防止大数溢出)
+                let middle = left + ((right - left) >> 1)
+                //target在左区间，middle下标已被搜索过，向左移一位
+                if (nums[middle] > target) right = middle - 1
+                //target在右区间，middle下标已被搜索过，向右移一位
+                else if (nums[middle] < target) left = middle + 1
+                else {
+                    //找到目标值，直接返回下标
+                    return middle
+                }
+            }
+            //未找到目标值
+            return -1
+        };
+        console.log(search([-1, 0, 3, 5, 9, 12], 9))
+    </script>
+</body>
+
+</html>

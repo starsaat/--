@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //二分法
+        //时间复杂度：O(logx)
+        //空间复杂度：O(1)
+        /* var mySqrt = function (x) {
+            //整数x的平方根一定是在 1 到 x 的范围内
+            let start = 1
+            let end = x
+            while (start <= end) {
+                //中间值
+                let middle = start + ((end - start) >> 1)
+                // 判断middle的平方是否小于或等于x，如果middle的平方小于x
+                if (middle <= x / middle) {
+                    // 判断(middle+1)的平方是否大于x，如果(middle+1)的平方大于x，那么middle就是x的平方根
+                    if ((middle + 1) > x / (middle + 1)) {
+                        return middle
+                    }
+                    // 如果middle的平方小于x并且(middle+1)的平方小于x，那么x的平方根比middle大，接下来搜索从middle+1到x的范围
+                    start = middle + 1
+                } else {
+                    // 如果middle的平方大于x，则x的平方根小于middle，接下来搜索1到middle-1的范围
+                    end = middle - 1
+                }
+            }
+            // 如果输入参数是0，就直接返回0
+            return 0
+        }; */
+
+        //袖珍计算器算法
+        //时间复杂度：O(1)
+        //空间复杂度：O(1)
+        /* var mySqrt = function (x) {
+            // 如果输入参数是0，就直接返回0
+            if (x == 0) return 0
+            //套用公式：x^(1/2) = (e^(lnx))^(1/2) = e^(0.5 * lnx)
+            let result = Number.parseInt(Math.exp(0.5 * Math.log(x)))
+            //由于计算机无法存储浮点数的精确值,运算过程中会存在误差
+            //因此在得到结果的整数部分 result 后，我们应当找出 result 与 result + 1 中哪一个是真正的答案
+            return (result + 1) <= x / (result + 1) ? result + 1 : result
+        }; */
+
+        //牛顿迭代法
+        var mySqrt = function (x) {
+
+        };
+
+    </script>
+</body>
+
+</html>

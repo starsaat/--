@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //暴力解法
+        var searchRange = function (nums, target) {
+            let start = -1
+            let end = -1
+            for (let i = 0; i <= nums.length; i++) {
+                if (nums[i] === target) {
+                    if (start === -1) start = i
+                    end = i
+                }
+            }
+            return [start, end]
+        }
+
+        //二分法解法
+        /*  var searchRange = function (nums, target) {
+             let left = leftBorder(nums, target)
+             let right = rightBorder(nums, target)
+ 
+             if (left == -2 || right == -2) return [-1, -1]
+             return right - left > 1 ? [left + 1, right - 1] : [-1, -1]
+         }
+ 
+         searchRange([5, 7, 7, 8, 8, 10], 8)
+         searchRange([5, 7, 7, 8, 8, 10], 5)
+         searchRange([5, 7, 7, 8, 8, 10], 10)
+         searchRange([2, 2], 3)
+         searchRange([1], 1)
+ 
+         //确定左边界
+         function leftBorder(nums, target) {
+             let left = 0
+             let right = nums.length - 1
+             let leftBorder = -2
+             while (left <= right) {
+                 let middle = left + ((right - left) >> 1)
+                 if (nums[middle] >= target) {
+                     right = middle - 1
+                     leftBorder = right
+                 }
+                 else {
+                     left = middle + 1
+                 }
+             }
+             return leftBorder
+         }
+ 
+         //确定右边界
+         function rightBorder(nums, target) {
+             let left = 0
+             let right = nums.length
+             let rightBorder = -2
+             while (left <= right) {
+                 let middle = left + ((right - left) >> 1)
+                 if (nums[middle] <= target) {
+                     left = middle + 1
+                     rightBorder = left
+                 } else {
+                     right = middle - 1
+                 }
+             }
+             return rightBorder
+         } */
+
+        //二分法解法（优化）
+        var searchRange = function (nums, target) {
+            let left = border(nums, target, true)
+            let right = border(nums, target, false)
+            return [left, right]
+        };
+
+        function border(nums, target, leftBorder = true) {
+            let left = 0
+            let rigth = nums.length - 1
+            let border = -1
+            while (left <= rigth) {
+                let middle = left + ((rigth - left) >> 1)
+                if (nums[middle] > target) rigth = rigth - 1
+                else if (nums[middle] < target) left = middle + 1
+                else {
+                    border = middle
+                    if (leftBorder) {
+                        rigth = middle - 1
+                    } else {
+                        left = middle + 1
+                    }
+                }
+            }
+            return border
+        }
+        searchRange([5, 7, 7, 8, 8, 10], 8)
+        searchRange([5, 7, 7, 8, 8, 10], 5)
+        searchRange([5, 7, 7, 8, 8, 10], 10)
+        searchRange([5, 7, 7, 8, 8, 10], 9)
+    </script>
+</body>
+
+</html>
